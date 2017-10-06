@@ -1,0 +1,18 @@
+<org.jenkinsci.plugins.github_branch_source.GitHubSCMSource>
+    <id>org.jenkinsci.plugins.github_branch_source.GitHubSCMNavigator::https://api.github.com::jenkinsci::branch-source-commit-skip-traits</id>
+    <checkoutCredentialsId>SAME</checkoutCredentialsId>
+    <scanCredentialsId>e4d8c11a-0d24-472f-b86b-4b017c160e9a</scanCredentialsId>
+    <repoOwner>cloudbeers</repoOwner>
+    <repository>stunning-adventure</repository>
+    <includes>*</includes>
+    <excludes></excludes>
+    <buildOriginBranch>true</buildOriginBranch>
+    <buildOriginBranchWithPR>true</buildOriginBranchWithPR>
+    <buildOriginPRMerge>false</buildOriginPRMerge>
+    <buildOriginPRHead>false</buildOriginPRHead>
+    <buildForkPRMerge>true</buildForkPRMerge>
+    <buildForkPRHead>false</buildForkPRHead>
+    <traits>
+        <org.jenkinsci.plugins.scm_filter.GitHubCommitSkipTrait plugin="github-commit-skip-scm-filter@${project.version}" />
+    </traits>
+</org.jenkinsci.plugins.github_branch_source.GitHubSCMSource>

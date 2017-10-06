@@ -8,13 +8,13 @@
         <version>2.33</version>
     </parent>
 
-    <artifactId>branch-source-commit-skip-traits</artifactId>
+    <artifactId>scm-trait-commit-skip-parent</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Branch Source Commit Skip Traits</name>
-    <url>https://wiki.jenkins-ci.org/display/JENKINS/Branch+Source+Commit+Skip+Traits+Plugin</url>
-    <description>Reactor adding an filtering strategy (to ignore commits on pull requests) to several Branch Source Plugin configuration.</description>
+    <name>Commit Skip SCM Behaviour</name>
+    <url>https://wiki.jenkins-ci.org/display/JENKINS/Commit+Skip+SCM+Behaviour+Plugin</url>
+    <description>Reactor adding several scm traits (to ignore commits on pull requests) to several SCM implementations.</description>
 
     <licenses>
         <license>
@@ -50,9 +50,9 @@
     </developers>
 
     <modules>
-        <module>branch-source-commit-skip-trait-common</module>
-        <module>bitbucket-source-commit-skip-trait-plugin</module>
-        <module>github-source-commit-skip-trait-plugin</module>
+        <module>scm-trait-commit-skip-common</module>
+        <module>bitbucket-scm-trait-commit-skip</module>
+        <module>github-scm-trait-commit-skip</module>
     </modules>
 
     <dependencies>
