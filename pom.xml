@@ -27,6 +27,7 @@
         <jenkins.version>2.32.3</jenkins.version>
         <bitbucket-branch-source.version>2.2.3</bitbucket-branch-source.version>
         <github-branch-source.version>2.2.3</github-branch-source.version>
+        <gitea.version>1.0.2</gitea.version>
         <scm-api.version>2.2.0</scm-api.version>
         <branch-api.version>2.0.11</branch-api.version>
         <git.version>3.5.0</git.version>
@@ -53,6 +54,7 @@
         <module>scm-trait-commit-skip-common</module>
         <module>bitbucket-scm-trait-commit-skip</module>
         <module>github-scm-trait-commit-skip</module>
+        <module>gitea-scm-trait-commit-skip</module>
     </modules>
 
     <dependencies>
