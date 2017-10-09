@@ -74,7 +74,7 @@ public class GitHubCommitSkipTrait extends CommitSkipTrait {
                     GHPullRequest pull = pullIterator.next();
                     if (("PR-" + pull.getNumber()).equals(scmHead.getName())) {
                         String message = pull.getHead().getCommit().getCommitShortInfo().getMessage().toLowerCase();
-                        return message.contains("[ci skip]") || message.contains("[skip ci]");
+                        return super.containsSkipToken(message);
                     }
                 }
             }

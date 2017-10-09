@@ -62,5 +62,9 @@ public abstract class CommitSkipTrait extends SCMSourceTrait{
 
         @Override
         abstract public boolean isExcluded(@NonNull SCMSourceRequest scmSourceRequest, @NonNull SCMHead scmHead) throws IOException, InterruptedException;
+
+        public boolean containsSkipToken(String commitMsg) {
+            return commitMsg.contains("[ci skip]") || commitMsg.contains("[skip ci]");
+        }
     }
 }
