@@ -15,13 +15,6 @@
     <url>https://wiki.jenkins-ci.org/display/JENKINS/Bitbucket+Commit+Skip+SCM+Behaviour+Plugin</url>
     <description>Adds a filtering trait according to the commit message (containing a [ci skip] or [skip ci] text) to an existing Bitbucket Branch Source Plugin configuration.</description>
 
-    <scm>
-        <connection>scm:git:git://github.com/jenkinsci/scm-trait-commit-skip-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/scm-trait-commit-skip-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/scm-trait-commit-skip-plugin</url>
-        <tag>HEAD</tag>
-    </scm>
-
     <dependencies>
 
         <dependency>
