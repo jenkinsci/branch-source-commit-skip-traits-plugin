@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>3.18</version>
+        <version>3.23</version>
     </parent>
 
     <artifactId>scm-trait-commit-skip-parent</artifactId>
@@ -26,13 +26,13 @@
     <properties>
         <revision>0.2.0</revision>
         <changelist>-SNAPSHOT</changelist>
-        <jenkins.version>2.32.3</jenkins.version>
         <bitbucket-branch-source.version>2.2.13-rc440.a1f1e6c1d925</bitbucket-branch-source.version>
         <github-branch-source.version>2.3.6</github-branch-source.version>
-        <scm-api.version>2.2.0</scm-api.version>
-        <branch-api.version>2.0.11</branch-api.version>
+        <scm-api.version>2.2.8</scm-api.version>
+        <branch-api.version>2.0.20</branch-api.version>
         <git.version>3.6.0</git.version>
-        <workflow.version>1.14.2</workflow.version>
+        <workflow.version>2.5</workflow.version>
+        <jenkins.version>2.73.3</jenkins.version>
         <java.level>8</java.level>
     </properties>
 
@@ -57,106 +57,58 @@
         <module>github-scm-trait-commit-skip</module>
     </modules>
 
-    <dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>branch-api</artifactId>
+                <version>${branch-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>cloudbees-folder</artifactId>
+                <version>6.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>scm-api</artifactId>
+                <version>${scm-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jenkins-ci</groupId>
+                <artifactId>symbol-annotation</artifactId>
+                <version>1.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>structs</artifactId>
+                <version>1.10</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jenkins-ci.plugins</groupId>
+                <artifactId>script-security</artifactId>
+                <version>1.25</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jenkins-ci.plugins.workflow</groupId>
+                <artifactId>workflow-scm-step</artifactId>
+                <version>2.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jenkins-ci</groupId>
+                <artifactId>annotation-indexer</artifactId>
+                <version>1.12</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-        <!-- Required for InjectedTest-->
-        <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>git</artifactId>
-            <version>${git.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- Required for hpi plugin tests-->
+    <dependencies>
+        <!-- Required for hpi:run -->
         <dependency>
             <groupId>org.jenkins-ci.plugins.workflow</groupId>
             <artifactId>workflow-aggregator</artifactId>
             <version>${workflow.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins.workflow</groupId>
-            <artifactId>workflow-multibranch</artifactId>
-            <version>${workflow.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins.workflow</groupId>
-            <artifactId>workflow-scm-step</artifactId>
-            <version>${workflow.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>branch-api</artifactId>
-            <version>${branch-api.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-         <!-- setting transitive dependencies version to comply with the maven-enforcer-plugin RequireUpperBoundDeps rule-->
-        <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>display-url-api</artifactId>
-            <version>0.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>credentials</artifactId>
-            <version>2.1.15</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jcraft</groupId>
-            <artifactId>jsch</artifactId>
-            <version>0.1.53</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.infradna.tool</groupId>
-            <artifactId>bridge-method-annotation</artifactId>
-            <version>1.17</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci</groupId>
-            <artifactId>annotation-indexer</artifactId>
-            <version>1.12</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>cloudbees-folder</artifactId>
-            <version>6.1.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>token-macro</artifactId>
-            <version>1.12.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.9</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>script-security</artifactId>
-            <version>1.16</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci.plugins</groupId>
-            <artifactId>structs</artifactId>
-            <version>1.10</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jenkins-ci</groupId>
-            <artifactId>symbol-annotation</artifactId>
-            <version>1.13</version>
         </dependency>
     </dependencies>
 
