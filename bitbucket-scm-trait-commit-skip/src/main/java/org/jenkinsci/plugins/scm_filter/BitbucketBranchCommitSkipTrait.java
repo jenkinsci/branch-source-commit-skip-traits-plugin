@@ -78,7 +78,7 @@ public class BitbucketBranchCommitSkipTrait extends BranchCommitSkipTrait{
                     BitbucketBranch branch = branchesIterator.next();
                     if (branch.getName().equals(scmHead.getName())) {
                         String message = branch.getMessage();
-                        return super.containsSkipToken(message);
+                        return super.containsSkipToken(message.toLowerCase());
                     }
                 }
             }

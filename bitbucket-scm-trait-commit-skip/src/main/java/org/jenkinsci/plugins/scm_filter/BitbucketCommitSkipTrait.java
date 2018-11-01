@@ -75,8 +75,8 @@ public class BitbucketCommitSkipTrait extends CommitSkipTrait{
                 while (pullIterator.hasNext()) {
                     BitbucketPullRequest pull = pullIterator.next();
                     if (pull.getSource().getBranch().getName().equals(scmHead.getName())) {
-                        String message = pull.getSource().getCommit().getMessage().toLowerCase();
-                        return super.containsSkipToken(message);
+                        String message = pull.getSource().getCommit().getMessage();
+                        return super.containsSkipToken(message.toLowerCase());
                     }
                 }
             }

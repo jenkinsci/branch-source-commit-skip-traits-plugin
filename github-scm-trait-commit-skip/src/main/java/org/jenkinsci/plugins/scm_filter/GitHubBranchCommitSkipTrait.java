@@ -75,7 +75,7 @@ public class GitHubBranchCommitSkipTrait extends BranchCommitSkipTrait {
                     GHBranch branch = branchesIterator.next();
                     if ((branch.getName()).equals(scmHead.getName())) {
                         String message = ((GitHubSCMSourceRequest) scmSourceRequest).getRepository().getCommit(branch.getSHA1()).getCommitShortInfo().getMessage();
-                        return super.containsSkipToken(message);
+                        return super.containsSkipToken(message.toLowerCase());
                     }
                 }
             }
