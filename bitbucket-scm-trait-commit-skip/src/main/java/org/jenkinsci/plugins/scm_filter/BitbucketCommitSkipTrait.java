@@ -44,14 +44,6 @@ public class BitbucketCommitSkipTrait extends CommitSkipTrait {
          * {@inheritDoc}
          */
         @Override
-        public String getDisplayName() {
-            return super.getDisplayName();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
         public boolean isApplicableToBuilder(@NonNull Class<? extends SCMBuilder> builderClass) {
             return BitbucketGitSCMBuilder.class.isAssignableFrom(builderClass);
         }

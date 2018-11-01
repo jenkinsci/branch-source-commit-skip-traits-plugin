@@ -44,14 +44,6 @@ public class GitHubBranchCommitSkipTrait extends BranchCommitSkipTrait {
          * {@inheritDoc}
          */
         @Override
-        public String getDisplayName() {
-            return super.getDisplayName();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
         public boolean isApplicableToBuilder(@NonNull Class<? extends SCMBuilder> builderClass) {
             return GitHubSCMBuilder.class.isAssignableFrom(builderClass);
         }
