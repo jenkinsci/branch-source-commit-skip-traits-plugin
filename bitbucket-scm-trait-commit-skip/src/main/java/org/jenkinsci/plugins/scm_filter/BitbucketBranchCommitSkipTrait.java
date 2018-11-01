@@ -3,8 +3,6 @@ package org.jenkinsci.plugins.scm_filter;
 import com.cloudbees.jenkins.plugins.bitbucket.BitbucketGitSCMBuilder;
 import com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSourceRequest;
 import com.cloudbees.jenkins.plugins.bitbucket.BranchSCMHead;
-import com.cloudbees.jenkins.plugins.bitbucket.api.BitbucketApi;
-import com.cloudbees.jenkins.plugins.bitbucket.api.BitbucketApiFactory;
 import com.cloudbees.jenkins.plugins.bitbucket.api.BitbucketBranch;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
