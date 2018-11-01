@@ -59,7 +59,7 @@ public class BitbucketCommitSkipTrait extends CommitSkipTrait{
     }
 
     /**
-     * Filter that excludes pull requests according to its last commit message (if it contains [ci skip] or [skip ci], case unsensitive).
+     * Filter that excludes pull requests according to its last commit message (if it contains [ci skip] or [skip ci], case insensitive).
      */
     public static class ExcludeCommitPRsSCMHeadFilter extends ExcludePRsSCMHeadFilter {
 

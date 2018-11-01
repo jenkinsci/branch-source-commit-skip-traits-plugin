@@ -53,7 +53,7 @@ public abstract class CommitSkipTrait extends SCMSourceTrait{
     }
 
     /**
-     * Filter that excludes pull requests according to its last commit message (if it contains [ci skip] or [skip ci], case unsensitive).
+     * Filter that excludes pull requests according to its last commit message (if it contains [ci skip] or [skip ci], case insensitive).
      */
     public abstract static class ExcludePRsSCMHeadFilter extends SCMHeadFilter {
 
