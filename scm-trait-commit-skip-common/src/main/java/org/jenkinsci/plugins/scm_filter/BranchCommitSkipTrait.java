@@ -21,7 +21,7 @@ public abstract class BranchCommitSkipTrait extends SCMSourceTrait {
     /**
      * Our descriptor.
      */
-    public abstract static class BranchCommitSkipTraitDescriptorImpl extends SCMSourceTraitDescriptor {
+    abstract static class BranchCommitSkipTraitDescriptorImpl extends SCMSourceTraitDescriptor {
 
         /**
          * {@inheritDoc}
@@ -44,6 +44,6 @@ public abstract class BranchCommitSkipTrait extends SCMSourceTrait {
     /**
      * Filter that excludes pull requests according to its last commit message (if it contains [ci skip] or [skip ci], case insensitive).
      */
-    public abstract static class ExcludeBranchesSCMHeadFilter extends CommitSkipTrait.ExcludePRsSCMHeadFilter {
+    abstract static class ExcludeBranchesSCMHeadFilter extends CommitSkipTrait.ExcludePRsSCMHeadFilter {
     }
 }
