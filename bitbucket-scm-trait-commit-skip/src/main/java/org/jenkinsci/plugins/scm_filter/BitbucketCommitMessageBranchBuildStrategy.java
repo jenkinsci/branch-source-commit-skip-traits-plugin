@@ -45,9 +45,7 @@ public class BitbucketCommitMessageBranchBuildStrategy extends CommitMessageBran
 
 	@Extension
 	public static class DescriptorImpl extends RegexFilterBranchBuildStrategyDescriptor {
-		/**
-		 * {@inheritDoc}
-		 */
+
 		@Override
 		public @Nonnull
 		String getDisplayName() {
@@ -62,6 +60,5 @@ public class BitbucketCommitMessageBranchBuildStrategy extends CommitMessageBran
 		public boolean isApplicable(@Nonnull SCMSourceDescriptor sourceDescriptor) {
 			return BitbucketSCMSource.DescriptorImpl.class.isAssignableFrom(sourceDescriptor.getClass());
 		}
-
 	}
 }

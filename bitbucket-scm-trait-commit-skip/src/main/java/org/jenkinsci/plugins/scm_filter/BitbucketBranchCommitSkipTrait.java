@@ -40,9 +40,6 @@ public class BitbucketBranchCommitSkipTrait extends BranchCommitSkipTrait {
     @SuppressWarnings("unused") // instantiated by Jenkins
     public static class DescriptorImpl extends BranchCommitSkipTraitDescriptorImpl {
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public boolean isApplicableToBuilder(@NonNull Class<? extends SCMBuilder> builderClass) {
             return BitbucketGitSCMBuilder.class.isAssignableFrom(builderClass);

@@ -39,9 +39,7 @@ public class GitHubCommitMessageBranchBuildStrategy extends CommitMessageBranchB
 
 	@Extension
 	public static class DescriptorImpl extends RegexFilterBranchBuildStrategyDescriptor {
-		/**
-		 * {@inheritDoc}
-		 */
+
 		@Override
 		public @Nonnull String getDisplayName() {
 			return CommitMessageBranchBuildStrategy.getDisplayName();
@@ -55,6 +53,5 @@ public class GitHubCommitMessageBranchBuildStrategy extends CommitMessageBranchB
 		public boolean isApplicable(@Nonnull SCMSourceDescriptor sourceDescriptor) {
 			return GitHubSCMSource.DescriptorImpl.class.isAssignableFrom(sourceDescriptor.getClass());
 		}
-
 	}
 }

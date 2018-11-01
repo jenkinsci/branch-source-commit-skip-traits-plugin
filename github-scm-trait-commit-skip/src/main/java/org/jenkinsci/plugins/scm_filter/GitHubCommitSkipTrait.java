@@ -40,9 +40,6 @@ public class GitHubCommitSkipTrait extends CommitSkipTrait {
     @SuppressWarnings("unused") // instantiated by Jenkins
     public static class DescriptorImpl extends CommitSkipTraitDescriptorImpl {
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public boolean isApplicableToBuilder(@NonNull Class<? extends SCMBuilder> builderClass) {
             return GitHubSCMBuilder.class.isAssignableFrom(builderClass);

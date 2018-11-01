@@ -12,9 +12,6 @@ import jenkins.scm.api.trait.SCMSourceTraitDescriptor;
  */
 public abstract class CommitSkipTrait extends SCMSourceTrait {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected abstract void decorateContext(SCMSourceContext<?, ?> context);
 
@@ -23,18 +20,11 @@ public abstract class CommitSkipTrait extends SCMSourceTrait {
      */
     abstract static class CommitSkipTraitDescriptorImpl extends SCMSourceTraitDescriptor {
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public String getDisplayName() {
             return "Commit message filtering behaviour (pull requests)";
         }
 
-
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public boolean isApplicableToSCM(@NonNull SCMDescriptor<?> scm) {
             return scm instanceof GitSCM.DescriptorImpl;
