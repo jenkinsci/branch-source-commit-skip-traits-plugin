@@ -30,7 +30,7 @@ public class GitHubBranchCommitSkipTrait extends BranchCommitSkipTrait {
 
     @Override
     protected void decorateContext(SCMSourceContext<?, ?> context) {
-        context.withFilter(new GitHubBranchCommitSkipTrait.ExcludeBranchCommitSCMHeadFilter());
+        context.withFilter(new ExcludeBranchCommitSCMHeadFilter());
     }
 
     /**

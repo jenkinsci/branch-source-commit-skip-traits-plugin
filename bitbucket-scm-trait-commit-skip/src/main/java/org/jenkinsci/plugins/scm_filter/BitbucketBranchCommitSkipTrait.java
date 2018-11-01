@@ -30,7 +30,7 @@ public class BitbucketBranchCommitSkipTrait extends BranchCommitSkipTrait {
 
     @Override
     protected void decorateContext(SCMSourceContext<?, ?> context) {
-        context.withFilter(new BitbucketBranchCommitSkipTrait.ExcludeBranchCommitSCMHeadFilter());
+        context.withFilter(new ExcludeBranchCommitSCMHeadFilter());
     }
 
     /**
