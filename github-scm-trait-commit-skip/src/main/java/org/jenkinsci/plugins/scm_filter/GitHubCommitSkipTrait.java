@@ -54,10 +54,6 @@ public class GitHubCommitSkipTrait extends CommitSkipTrait {
      */
     public static class ExcludeCommitPRsSCMHeadFilter extends ExcludePRsSCMHeadFilter {
 
-        public ExcludeCommitPRsSCMHeadFilter() {
-            super();
-        }
-
         @Override
         public boolean isExcluded(@NonNull SCMSourceRequest scmSourceRequest, @NonNull SCMHead scmHead) throws IOException, InterruptedException {
             if (scmHead instanceof PullRequestSCMHead) {

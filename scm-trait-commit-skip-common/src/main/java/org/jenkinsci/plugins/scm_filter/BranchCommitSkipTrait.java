@@ -11,12 +11,6 @@ import jenkins.scm.api.trait.*;
 public abstract class BranchCommitSkipTrait extends SCMSourceTrait {
 
     /**
-     * Constructor for stapler.
-     */
-    public BranchCommitSkipTrait() {
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -49,8 +43,5 @@ public abstract class BranchCommitSkipTrait extends SCMSourceTrait {
      * Filter that excludes pull requests according to its last commit message (if it contains [ci skip] or [skip ci], case insensitive).
      */
     public abstract static class ExcludeBranchesSCMHeadFilter extends CommitSkipTrait.ExcludePRsSCMHeadFilter {
-
-        public ExcludeBranchesSCMHeadFilter() {
-        }
     }
 }

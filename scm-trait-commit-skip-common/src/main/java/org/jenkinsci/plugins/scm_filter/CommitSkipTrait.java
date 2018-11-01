@@ -18,12 +18,6 @@ import java.io.IOException;
 public abstract class CommitSkipTrait extends SCMSourceTrait {
 
     /**
-     * Constructor for stapler.
-     */
-    public CommitSkipTrait() {
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -56,9 +50,6 @@ public abstract class CommitSkipTrait extends SCMSourceTrait {
      * Filter that excludes pull requests according to its last commit message (if it contains [ci skip] or [skip ci], case insensitive).
      */
     public abstract static class ExcludePRsSCMHeadFilter extends SCMHeadFilter {
-
-        public ExcludePRsSCMHeadFilter() {
-        }
 
         @Override
         abstract public boolean isExcluded(@NonNull SCMSourceRequest scmSourceRequest, @NonNull SCMHead scmHead) throws IOException, InterruptedException;
