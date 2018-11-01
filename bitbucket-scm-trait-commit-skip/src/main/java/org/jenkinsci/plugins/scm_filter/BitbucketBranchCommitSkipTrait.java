@@ -14,7 +14,6 @@ import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 /**
  * @author witokondoria
@@ -71,9 +70,7 @@ public class BitbucketBranchCommitSkipTrait extends BranchCommitSkipTrait{
         public boolean isExcluded(@NonNull SCMSourceRequest scmSourceRequest, @NonNull SCMHead scmHead) throws IOException, InterruptedException {
             if (scmHead instanceof BranchSCMHead) {
                 Iterable<BitbucketBranch> branches = ((BitbucketSCMSourceRequest) scmSourceRequest).getBranches();
-                Iterator<BitbucketBranch> branchesIterator = branches.iterator();
-                while (branchesIterator.hasNext()) {
-                    BitbucketBranch branch = branchesIterator.next();
+                for (BitbucketBranch branch : branches) {
                     if (branch.getName().equals(scmHead.getName())) {
                         String message = branch.getMessage();
                         return super.containsSkipToken(message.toLowerCase());

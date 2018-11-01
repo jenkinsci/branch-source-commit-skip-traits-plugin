@@ -14,7 +14,6 @@ import org.kohsuke.github.GHPullRequest;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 /**
  * @author witokondoria
@@ -70,9 +69,7 @@ public class GitHubCommitSkipTrait extends CommitSkipTrait {
         public boolean isExcluded(@NonNull SCMSourceRequest scmSourceRequest, @NonNull SCMHead scmHead) throws IOException, InterruptedException {
             if (scmHead instanceof PullRequestSCMHead) {
                 Iterable<GHPullRequest> pulls = ((GitHubSCMSourceRequest) scmSourceRequest).getPullRequests();
-                Iterator<GHPullRequest> pullIterator = pulls.iterator();
-                while (pullIterator.hasNext()) {
-                    GHPullRequest pull = pullIterator.next();
+                for (GHPullRequest pull : pulls) {
                     if (("PR-" + pull.getNumber()).equals(scmHead.getName())) {
                         String message = pull.getHead().getCommit().getCommitShortInfo().getMessage();
                         return super.containsSkipToken(message.toLowerCase());

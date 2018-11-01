@@ -14,7 +14,6 @@ import org.kohsuke.github.GHBranch;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 /**
  * @author witokondoria
@@ -70,9 +69,7 @@ public class GitHubBranchCommitSkipTrait extends BranchCommitSkipTrait {
         public boolean isExcluded(@NonNull SCMSourceRequest scmSourceRequest, @NonNull SCMHead scmHead) throws IOException, InterruptedException {
             if (scmHead instanceof BranchSCMHead) {
                 Iterable<GHBranch> branches = ((GitHubSCMSourceRequest) scmSourceRequest).getBranches();
-                Iterator<GHBranch> branchesIterator = branches.iterator();
-                while (branchesIterator.hasNext()) {
-                    GHBranch branch = branchesIterator.next();
+                for (GHBranch branch : branches) {
                     if ((branch.getName()).equals(scmHead.getName())) {
                         String message = ((GitHubSCMSourceRequest) scmSourceRequest).getRepository().getCommit(branch.getSHA1()).getCommitShortInfo().getMessage();
                         return super.containsSkipToken(message.toLowerCase());

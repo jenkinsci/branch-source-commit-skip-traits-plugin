@@ -14,7 +14,6 @@ import jenkins.scm.api.trait.SCMSourceRequest;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 /**
  * @author witokondoria
@@ -71,9 +70,7 @@ public class BitbucketCommitSkipTrait extends CommitSkipTrait{
         public boolean isExcluded(@NonNull SCMSourceRequest scmSourceRequest, @NonNull SCMHead scmHead) throws IOException, InterruptedException {
             if (scmHead instanceof PullRequestSCMHead) {
                 Iterable<BitbucketPullRequest> pulls = ((BitbucketSCMSourceRequest) scmSourceRequest).getPullRequests();
-                Iterator<BitbucketPullRequest> pullIterator = pulls.iterator();
-                while (pullIterator.hasNext()) {
-                    BitbucketPullRequest pull = pullIterator.next();
+                for (BitbucketPullRequest pull : pulls) {
                     if (pull.getSource().getBranch().getName().equals(scmHead.getName())) {
                         String message = pull.getSource().getCommit().getMessage();
                         return super.containsSkipToken(message.toLowerCase());
