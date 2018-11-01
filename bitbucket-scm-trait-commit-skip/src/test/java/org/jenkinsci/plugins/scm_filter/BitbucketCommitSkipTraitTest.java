@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 import org.jvnet.hudson.test.JenkinsRule;
 
-import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
@@ -31,6 +31,6 @@ public class BitbucketCommitSkipTraitTest {
     @Test
     public void skipci() throws Exception {
         BitbucketSCMSource instance = (BitbucketSCMSource) load();
-        assertThat(instance.getTraits(), containsInAnyOrder(instanceOf(BitbucketCommitSkipTrait.class)));
+        assertThat(instance.getTraits(), contains(instanceOf(BitbucketCommitSkipTrait.class)));
     }
 }
