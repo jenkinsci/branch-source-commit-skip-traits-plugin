@@ -31,9 +31,6 @@ public class GitHubCommitSkipTraitTest {
     @Test
     public void skipci() throws Exception {
         GitHubSCMSource instance = (GitHubSCMSource) load();
-        assertThat(instance.getTraits(),
-                containsInAnyOrder(
-                        instanceOf(GitHubCommitSkipTrait.class))
-                );
+        assertThat(instance.getTraits(), containsInAnyOrder(instanceOf(GitHubCommitSkipTrait.class)));
     }
 }

@@ -31,9 +31,6 @@ public class BitbucketCommitSkipTraitTest {
     @Test
     public void skipci() throws Exception {
         BitbucketSCMSource instance = (BitbucketSCMSource) load();
-        assertThat(instance.getTraits(),
-                containsInAnyOrder(
-                        instanceOf(BitbucketCommitSkipTrait.class))
-        );
+        assertThat(instance.getTraits(), containsInAnyOrder(instanceOf(BitbucketCommitSkipTrait.class)));
     }
 }

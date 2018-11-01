@@ -15,12 +15,12 @@ import java.io.IOException;
 /**
  * @author witokondoria
  */
-public abstract class CommitSkipTrait extends SCMSourceTrait{
+public abstract class CommitSkipTrait extends SCMSourceTrait {
 
     /**
      * Constructor for stapler.
      */
-    public CommitSkipTrait(){
+    public CommitSkipTrait() {
     }
 
     /**

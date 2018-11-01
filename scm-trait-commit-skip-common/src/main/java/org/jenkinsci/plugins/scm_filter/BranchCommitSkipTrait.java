@@ -8,12 +8,12 @@ import jenkins.scm.api.trait.*;
 /**
  * @author witokondoria
  */
-public abstract class BranchCommitSkipTrait extends SCMSourceTrait{
+public abstract class BranchCommitSkipTrait extends SCMSourceTrait {
 
     /**
      * Constructor for stapler.
      */
-    public BranchCommitSkipTrait(){
+    public BranchCommitSkipTrait() {
     }
 
     /**
@@ -25,7 +25,7 @@ public abstract class BranchCommitSkipTrait extends SCMSourceTrait{
     /**
      * Our descriptor.
      */
-    public abstract static class BranchCommitSkipTraitDescriptorImpl extends SCMSourceTraitDescriptor{
+    public abstract static class BranchCommitSkipTraitDescriptorImpl extends SCMSourceTraitDescriptor {
 
         /**
          * {@inheritDoc}

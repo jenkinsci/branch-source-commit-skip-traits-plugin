@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * @author witokondoria
  */
-public class BitbucketCommitSkipTrait extends CommitSkipTrait{
+public class BitbucketCommitSkipTrait extends CommitSkipTrait {
 
     /**
      * Constructor for stapler.

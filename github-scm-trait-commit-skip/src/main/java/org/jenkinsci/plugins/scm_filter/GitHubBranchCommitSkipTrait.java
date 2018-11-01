@@ -32,6 +32,7 @@ public class GitHubBranchCommitSkipTrait extends BranchCommitSkipTrait {
     protected void decorateContext(SCMSourceContext<?, ?> context) {
         context.withFilter(new GitHubBranchCommitSkipTrait.ExcludeBranchCommitSCMHeadFilter());
     }
+
     /**
      * Our descriptor.
      */
@@ -59,7 +60,7 @@ public class GitHubBranchCommitSkipTrait extends BranchCommitSkipTrait {
     /**
      * Filter that excludes pull requests according to its last commit message (if it contains [ci skip] or [skip ci], case insensitive).
      */
-    public static class ExcludeBranchCommitSCMHeadFilter extends ExcludeBranchesSCMHeadFilter{
+    public static class ExcludeBranchCommitSCMHeadFilter extends ExcludeBranchesSCMHeadFilter {
 
         public ExcludeBranchCommitSCMHeadFilter() {
             super();
