@@ -52,7 +52,7 @@ public class GitHubCommitSkipTrait extends CommitSkipTrait {
     /**
      * Filter that excludes pull requests according to its last commit message (if it contains [ci skip] or [skip ci], case insensitive).
      */
-    private static class ExcludeCommitPRsSCMHeadFilter extends ExcludePRsSCMHeadFilter {
+    private static class ExcludeCommitPRsSCMHeadFilter extends ExcludeByMessageSCMHeadFilter {
 
         @Override
         public boolean isExcluded(@NonNull SCMSourceRequest scmSourceRequest, @NonNull SCMHead scmHead) throws IOException, InterruptedException {

@@ -40,10 +40,4 @@ public abstract class BranchCommitSkipTrait extends SCMSourceTrait {
             return scm instanceof GitSCM.DescriptorImpl;
         }
     }
-
-    /**
-     * Filter that excludes pull requests according to its last commit message (if it contains [ci skip] or [skip ci], case insensitive).
-     */
-    abstract static class ExcludeBranchesSCMHeadFilter extends CommitSkipTrait.ExcludePRsSCMHeadFilter {
-    }
 }
