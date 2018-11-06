@@ -13,7 +13,7 @@
 
     <name>GitHub Commit Skip SCM Behaviour</name>
     <url>https://wiki.jenkins-ci.org/display/JENKINS/GitHub+Commit+Skip+SCM+Behaviour+Plugin</url>
-    <description>Adds a filtering trait according to the commit message (containing a [ci skip] or [skip ci] text) to an existing Github Branch Source Plugin configuration.</description>
+    <description>Allows to ignore github Branches/Pull Requests/Commits based on the content of commit messages</description>
 
     <dependencyManagement>
         <dependencies>
@@ -37,12 +37,23 @@
             <artifactId>scm-trait-commit-skip-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jenkins-ci.plugins</groupId>
+            <artifactId>branch-api</artifactId>
+        </dependency>
 
         <!-- optional (maybe not so) dependency of git, needed to make InjectedTest works -->
         <dependency>
             <groupId>org.jenkins-ci.plugins</groupId>
             <artifactId>token-macro</artifactId>
             <version>1.12.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

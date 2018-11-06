@@ -13,7 +13,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.jenkinsci.plugins.scm.trait.commit.skip;
+package org.jenkinsci.plugins.scm_filter;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -29,43 +29,21 @@ import com.cloudbees.jenkins.plugins.bitbucket.client.branch.BitbucketCloudCommi
 
 import jenkins.scm.api.SCMHead;
 
-public class BitbucketSkipCommitBuildStrategyTest {
+public class BitbucketCommitMessageBranchBuildStrategyTest {
     @Test
-    public void skip_build_event_if_author_pattern_matches() throws Exception {
-        BitbucketSkipCommitBuildStrategy strategy = new BitbucketSkipCommitBuildStrategy(null, "*@acme.com*");
+    public void skip_build_event_if_pattern_matches() throws Exception {
+        BitbucketCommitMessageBranchBuildStrategy strategy = new BitbucketCommitMessageBranchBuildStrategy("initial");
 
         SCMHead head = mock(SCMHead.class);
         when(head.getName()).thenReturn("feature/release");
 
-        BitbucketSCMSource source = new BitbucketSCMSource("amuniz", "test-repos");
-        assertThat(strategy.isAutomaticBuild(source, head, buildRevision(head), null), equalTo(false));
-    }
-
-    @Test
-    public void skip_build_event_if_message_pattern_matches() throws Exception {
-        BitbucketSkipCommitBuildStrategy strategy = new BitbucketSkipCommitBuildStrategy("initial*", null);
-
-        SCMHead head = mock(SCMHead.class);
-        when(head.getName()).thenReturn("feature/release");
-        
         BitbucketSCMSource source = new BitbucketSCMSource("amuniz", "test-repos");
         assertThat(strategy.isAutomaticBuild(source, head, buildRevision(head), null), equalTo(false));
     }
 
     @Test
     public void no_skip_build_event_if_no_matches() throws Exception {
-        BitbucketSkipCommitBuildStrategy strategy = new BitbucketSkipCommitBuildStrategy("*test*", "*test*");
-        
-        SCMHead head = mock(SCMHead.class);
-        when(head.getName()).thenReturn("feature/release");
-        
-        BitbucketSCMSource source = new BitbucketSCMSource("amuniz", "test-repos");
-        assertThat(strategy.isAutomaticBuild(source, head, buildRevision(head), null), equalTo(true));
-    }
-
-    @Test
-    public void no_skip_build_event_with_default() throws Exception {
-        BitbucketSkipCommitBuildStrategy strategy = new BitbucketSkipCommitBuildStrategy(null, null);
+        BitbucketCommitMessageBranchBuildStrategy strategy = new BitbucketCommitMessageBranchBuildStrategy(".*test.*");
         
         SCMHead head = mock(SCMHead.class);
         when(head.getName()).thenReturn("feature/release");

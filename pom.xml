@@ -26,7 +26,7 @@
     <properties>
         <revision>0.2.0</revision>
         <changelist>-SNAPSHOT</changelist>
-        <bitbucket-branch-source.version>2.2.13-rc452.90c8a58d6625</bitbucket-branch-source.version>
+        <bitbucket-branch-source.version>2.2.14</bitbucket-branch-source.version>
         <github-branch-source.version>2.3.6</github-branch-source.version>
         <scm-api.version>2.2.8</scm-api.version>
         <branch-api.version>2.0.20</branch-api.version>
