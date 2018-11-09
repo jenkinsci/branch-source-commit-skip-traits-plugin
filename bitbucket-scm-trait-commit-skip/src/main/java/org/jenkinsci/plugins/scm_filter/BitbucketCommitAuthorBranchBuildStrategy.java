@@ -26,7 +26,7 @@ public class BitbucketCommitAuthorBranchBuildStrategy extends CommitAuthorBranch
 	}
 
 	@Override
-	public String getAuthor(SCMSource source, SCMRevision currRevision) throws CouldNotGetCommitAuthorException {
+	public String getAuthor(SCMSource source, SCMRevision currRevision) throws CouldNotGetCommitDataException {
 		SCMRevision revision = currRevision;
 		if (currRevision instanceof PullRequestSCMRevision) {
 			PullRequestSCMRevision<?> pr = (PullRequestSCMRevision<?>) currRevision;
@@ -40,7 +40,7 @@ public class BitbucketCommitAuthorBranchBuildStrategy extends CommitAuthorBranch
 			return Util.fixEmpty(bbRevision.getAuthor());
 		}
 
-		throw new CouldNotGetCommitAuthorException("Revision class is not a BitbucketGitSCMRevision or BitbucketSCMSource.MercurialRevision");
+		throw new CouldNotGetCommitDataException("Revision class is not a BitbucketGitSCMRevision or BitbucketSCMSource.MercurialRevision");
 	}
 
 	@Extension

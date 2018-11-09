@@ -34,7 +34,7 @@ public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrateg
 		return compiledPattern;
 	}
 
-	public abstract String getAuthor(SCMSource source, SCMRevision revision) throws CouldNotGetCommitAuthorException;
+	public abstract String getAuthor(SCMSource source, SCMRevision revision) throws CouldNotGetCommitDataException;
 
 	public CommitAuthorBranchBuildStrategy(String pattern){
 		this.pattern = pattern;
@@ -46,7 +46,7 @@ public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrateg
 		try {
 			author = getAuthor(source, currRevision);
 		}
-		catch (CouldNotGetCommitAuthorException e) {
+		catch (CouldNotGetCommitDataException e) {
 			LOGGER.error("Could not attempt to prevent automatic build by commit message pattern "
 					+ "because of an error when fetching the commit author", e);
 			return true;

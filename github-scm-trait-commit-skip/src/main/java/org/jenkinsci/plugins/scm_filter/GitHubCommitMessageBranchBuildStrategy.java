@@ -6,18 +6,14 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
 import org.apache.commons.lang.StringUtils;
-import org.jenkinsci.plugins.github_branch_source.Connector;
 import org.jenkinsci.plugins.github_branch_source.GitHubSCMSource;
 import org.kohsuke.github.GHCommit;
-import org.kohsuke.github.GitHub;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 
 import hudson.Extension;
-import hudson.model.Item;
 import hudson.util.FormValidation;
 import jenkins.branch.BranchBuildStrategyDescriptor;
-import jenkins.plugins.git.AbstractGitSCMSource;
 import jenkins.scm.api.SCMRevision;
 import jenkins.scm.api.SCMSource;
 import jenkins.scm.api.SCMSourceDescriptor;
@@ -31,20 +27,13 @@ public class GitHubCommitMessageBranchBuildStrategy extends CommitMessageBranchB
 
 	@Override
 	@CheckForNull
-	public String getMessage(SCMSource source, SCMRevision revision) throws CouldNotGetCommitMessageException {
-		GitHubSCMSource ghSource = (GitHubSCMSource) source;
-		AbstractGitSCMSource.SCMRevisionImpl gitRevision = (AbstractGitSCMSource.SCMRevisionImpl) revision;
-		GitHub gitHub = null;
+	public String getMessage(SCMSource source, SCMRevision revision) throws CouldNotGetCommitDataException {
+		GHCommit commit = GitHubUtils.getCommit(source, revision);
 		try {
-			gitHub = Connector.connect(ghSource.getApiUri(), Connector.lookupScanCredentials
-					((Item) ghSource.getOwner(), ghSource.getApiUri(), ghSource.getCredentialsId()));
-			GHCommit commit = gitHub.getRepository(ghSource.getRepoOwner()+"/"+ghSource.getRepository()).getCommit(gitRevision.getHash());
 			return commit.getCommitShortInfo().getMessage();
-		} catch (IOException e){
-			throw new CouldNotGetCommitMessageException(e);
 		}
-		finally{
-			Connector.release(gitHub);
+		catch (IOException e) {
+			throw new CouldNotGetCommitDataException(e);
 		}
 	}
 

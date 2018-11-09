@@ -26,7 +26,7 @@ public class BitbucketCommitMessageBranchBuildStrategy extends CommitMessageBran
 	}
 
 	@Override
-	public String getMessage(SCMSource source, SCMRevision currRevision) throws CouldNotGetCommitMessageException {
+	public String getMessage(SCMSource source, SCMRevision currRevision) throws CouldNotGetCommitDataException {
 		SCMRevision revision = currRevision;
 		if (currRevision instanceof PullRequestSCMRevision) {
 			PullRequestSCMRevision<?> pr = (PullRequestSCMRevision<?>) currRevision;
@@ -40,7 +40,7 @@ public class BitbucketCommitMessageBranchBuildStrategy extends CommitMessageBran
 			return Util.fixEmpty(bbRevision.getMessage());
 		}
 
-		throw new CouldNotGetCommitMessageException("Revision class is not a BitbucketGitSCMRevision or BitbucketSCMSource.MercurialRevision");
+		throw new CouldNotGetCommitDataException("Revision class is not a BitbucketGitSCMRevision or BitbucketSCMSource.MercurialRevision");
 	}
 
 	@Extension

@@ -38,7 +38,7 @@ public abstract class CommitMessageBranchBuildStrategy extends BranchBuildStrate
 		return compiledPattern;
 	}
 
-	public abstract String getMessage(SCMSource source, SCMRevision revision) throws CouldNotGetCommitMessageException;
+	public abstract String getMessage(SCMSource source, SCMRevision revision) throws CouldNotGetCommitDataException;
 
 	public CommitMessageBranchBuildStrategy(String pattern){
 		this.pattern = pattern;
@@ -50,7 +50,7 @@ public abstract class CommitMessageBranchBuildStrategy extends BranchBuildStrate
 		try {
 			message = getMessage(source, currRevision);
 		}
-		catch (CouldNotGetCommitMessageException e) {
+		catch (CouldNotGetCommitDataException e) {
 			LOGGER.error("Could not attempt to prevent automatic build by commit message pattern "
 					+ "because of an error when fetching the commit message", e);
 			return true;
