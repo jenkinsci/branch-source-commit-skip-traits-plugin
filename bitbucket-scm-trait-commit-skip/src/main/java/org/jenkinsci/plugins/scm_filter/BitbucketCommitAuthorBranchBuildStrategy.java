@@ -44,7 +44,7 @@ public class BitbucketCommitAuthorBranchBuildStrategy extends CommitAuthorBranch
 	}
 
 	@Extension
-	public static class DescriptorImpl extends BranchBuildStrategyDescriptor {
+	public static class DescriptorImpl extends RegexFilterBranchBuildStrategyDescriptor {
 		/**
 		 * {@inheritDoc}
 		 */
@@ -61,13 +61,6 @@ public class BitbucketCommitAuthorBranchBuildStrategy extends CommitAuthorBranch
 		@Override
 		public boolean isApplicable(@Nonnull SCMSourceDescriptor sourceDescriptor) {
 			return BitbucketSCMSource.DescriptorImpl.class.isAssignableFrom(sourceDescriptor.getClass());
-		}
-
-		public FormValidation doCheckPattern(@QueryParameter String value) {
-			if (StringUtils.isBlank(value)) {
-				return FormValidation.error("Cannot be empty");
-			}
-			return FormValidation.ok();
 		}
 
 	}
