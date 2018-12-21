@@ -3,12 +3,13 @@ package org.jenkinsci.plugins.scm_filter;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import hudson.Extension;
 import jenkins.scm.api.SCMHead;
-import jenkins.scm.api.trait.SCMBuilder;
+import jenkins.scm.api.SCMSource;
 import jenkins.scm.api.trait.SCMSourceContext;
 import jenkins.scm.api.trait.SCMSourceRequest;
 import jenkins.scm.impl.trait.Selection;
 import org.jenkinsci.Symbol;
-import org.jenkinsci.plugins.github_branch_source.GitHubSCMBuilder;
+import org.jenkinsci.plugins.github_branch_source.GitHubSCMSource;
+import org.jenkinsci.plugins.github_branch_source.GitHubSCMSourceContext;
 import org.jenkinsci.plugins.github_branch_source.GitHubSCMSourceRequest;
 import org.jenkinsci.plugins.github_branch_source.PullRequestSCMHead;
 import org.kohsuke.github.GHPullRequest;
@@ -44,8 +45,13 @@ public class GitHubCommitSkipTrait extends CommitSkipTrait {
     public static class DescriptorImpl extends CommitSkipTraitDescriptorImpl {
 
         @Override
-        public boolean isApplicableToBuilder(@NonNull Class<? extends SCMBuilder> builderClass) {
-            return GitHubSCMBuilder.class.isAssignableFrom(builderClass);
+        public Class<? extends SCMSourceContext> getContextClass() {
+            return GitHubSCMSourceContext.class;
+        }
+
+        @Override
+        public Class<? extends SCMSource> getSourceClass() {
+            return GitHubSCMSource.class;
         }
     }
 

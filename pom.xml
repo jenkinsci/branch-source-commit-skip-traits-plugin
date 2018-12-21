@@ -30,7 +30,6 @@
         <github-branch-source.version>2.3.6</github-branch-source.version>
         <scm-api.version>2.2.8</scm-api.version>
         <branch-api.version>2.0.20</branch-api.version>
-        <git.version>3.6.0</git.version>
         <workflow.version>2.5</workflow.version>
         <mockito.version>2.17.0</mockito.version>
         <jenkins.version>2.73.3</jenkins.version>
