@@ -6,6 +6,7 @@ import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.trait.SCMBuilder;
 import jenkins.scm.api.trait.SCMSourceContext;
 import jenkins.scm.api.trait.SCMSourceRequest;
+import jenkins.scm.impl.trait.Selection;
 import org.jenkinsci.Symbol;
 import org.jenkinsci.plugins.github_branch_source.BranchSCMHead;
 import org.jenkinsci.plugins.github_branch_source.GitHubSCMBuilder;
@@ -36,7 +37,9 @@ public class GitHubBranchCommitSkipTrait extends BranchCommitSkipTrait {
     /**
      * Our descriptor.
      */
-    @Extension @Symbol("gitHubBranchCommitSkipTrait")
+    @Extension
+    @Selection
+    @Symbol("gitHubBranchCommitSkipTrait")
     @SuppressWarnings("unused") // instantiated by Jenkins
     public static class DescriptorImpl extends BranchCommitSkipTraitDescriptorImpl {
 

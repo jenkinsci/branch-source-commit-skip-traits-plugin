@@ -10,6 +10,7 @@ import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.trait.SCMBuilder;
 import jenkins.scm.api.trait.SCMSourceContext;
 import jenkins.scm.api.trait.SCMSourceRequest;
+import jenkins.scm.impl.trait.Selection;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -36,7 +37,9 @@ public class BitbucketCommitSkipTrait extends CommitSkipTrait {
     /**
      * Our descriptor.
      */
-    @Extension @Symbol("bitbucketCommitSkipTrait")
+    @Extension
+    @Selection
+    @Symbol("bitbucketCommitSkipTrait")
     @SuppressWarnings("unused") // instantiated by Jenkins
     public static class DescriptorImpl extends CommitSkipTraitDescriptorImpl {
 
