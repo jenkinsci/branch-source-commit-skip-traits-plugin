@@ -11,6 +11,9 @@ import jenkins.scm.api.SCMRevision;
 import jenkins.scm.api.SCMSource;
 import jenkins.scm.api.SCMSourceOwner;
 
+/**
+ * A strategy for avoiding automatic builds for commits with authors that contain a specific pattern.
+ */
 public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrategy {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(CommitAuthorBranchBuildStrategy.class);
@@ -47,7 +50,7 @@ public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrateg
 			author = getAuthor(source, currRevision);
 		}
 		catch (CouldNotGetCommitDataException e) {
-			LOGGER.error("Could not attempt to prevent automatic build by commit message pattern "
+			LOGGER.error("Could not attempt to prevent automatic build by commit author pattern "
 					+ "because of an error when fetching the commit author", e);
 			return true;
 		}

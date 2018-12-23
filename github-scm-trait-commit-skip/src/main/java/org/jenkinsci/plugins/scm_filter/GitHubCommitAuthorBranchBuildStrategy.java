@@ -5,15 +5,11 @@ import java.io.IOException;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 
-import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.plugins.github_branch_source.GitHubSCMSource;
 import org.kohsuke.github.GHCommit;
 import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.QueryParameter;
 
 import hudson.Extension;
-import hudson.util.FormValidation;
-import jenkins.branch.BranchBuildStrategyDescriptor;
 import jenkins.scm.api.SCMRevision;
 import jenkins.scm.api.SCMSource;
 import jenkins.scm.api.SCMSourceDescriptor;

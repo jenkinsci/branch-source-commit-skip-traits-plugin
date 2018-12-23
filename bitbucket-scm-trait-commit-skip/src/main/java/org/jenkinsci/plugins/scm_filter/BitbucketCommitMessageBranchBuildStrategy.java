@@ -2,9 +2,7 @@ package org.jenkinsci.plugins.scm_filter;
 
 import javax.annotation.Nonnull;
 
-import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.QueryParameter;
 
 import com.cloudbees.jenkins.plugins.bitbucket.BitbucketGitSCMRevision;
 import com.cloudbees.jenkins.plugins.bitbucket.BitbucketSCMSource;
@@ -12,8 +10,6 @@ import com.cloudbees.jenkins.plugins.bitbucket.PullRequestSCMRevision;
 
 import hudson.Extension;
 import hudson.Util;
-import hudson.util.FormValidation;
-import jenkins.branch.BranchBuildStrategyDescriptor;
 import jenkins.scm.api.SCMRevision;
 import jenkins.scm.api.SCMSource;
 import jenkins.scm.api.SCMSourceDescriptor;

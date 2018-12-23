@@ -13,7 +13,7 @@
 
     <name>Bitbucket Commit Skip SCM Behaviour</name>
     <url>https://wiki.jenkins-ci.org/display/JENKINS/Bitbucket+Commit+Skip+SCM+Behaviour+Plugin</url>
-    <description>Adds a filtering trait according to the commit message (containing a [ci skip] or [skip ci] text) to an existing Bitbucket Branch Source Plugin configuration.</description>
+    <description>Allows to ignore Bitbucket branches/pull requests/commits based on the content of commit messages</description>
 
     <repositories>
         <repository>

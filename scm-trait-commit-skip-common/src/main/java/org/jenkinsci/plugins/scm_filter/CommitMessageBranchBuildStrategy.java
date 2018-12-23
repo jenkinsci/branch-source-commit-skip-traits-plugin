@@ -12,8 +12,9 @@ import jenkins.scm.api.SCMSource;
 import jenkins.scm.api.SCMSourceOwner;
 
 /**
- * A strategy for avoiding automatic builds for commits with messages that contain a specific pattern<br>
- * This is similar to what hudson.plugins.git.extensions.impl.MessageExclusion does.<br>
+ * A strategy for avoiding automatic builds for commits with messages that contain a specific pattern.
+ * <p>
+ * This is similar to what {@link hudson.plugins.git.extensions.impl.MessageExclusion} does.
  */
 public abstract class CommitMessageBranchBuildStrategy extends BranchBuildStrategy {
 

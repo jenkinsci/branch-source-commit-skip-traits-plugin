@@ -13,7 +13,7 @@
 
     <name>GitHub Commit Skip SCM Behaviour</name>
     <url>https://wiki.jenkins-ci.org/display/JENKINS/GitHub+Commit+Skip+SCM+Behaviour+Plugin</url>
-    <description>Allows to ignore github Branches/Pull Requests/Commits based on the content of commit messages</description>
+    <description>Allows to ignore GitHub branches/pull requests/commits based on the content of commit messages</description>
 
     <dependencyManagement>
         <dependencies>
