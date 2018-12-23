@@ -22,7 +22,7 @@ public abstract class CommitSkipTrait extends SCMSourceTrait {
 
         @Override
         public String getDisplayName() {
-            return "Commit message filtering behaviour (pull requests)";
+            return "Filter pull requests by commit message";
         }
 
         @Override

@@ -22,7 +22,7 @@ public abstract class BranchCommitSkipTrait extends SCMSourceTrait {
 
         @Override
         public String getDisplayName() {
-            return "Commit message filtering behaviour (branches)";
+            return "Filter branches by commit message";
         }
 
         @Override
