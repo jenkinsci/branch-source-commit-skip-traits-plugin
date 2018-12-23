@@ -16,60 +16,58 @@ import jenkins.scm.api.SCMSourceOwner;
  */
 public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrategy {
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(CommitAuthorBranchBuildStrategy.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(CommitAuthorBranchBuildStrategy.class);
 
-	private final String pattern;
+    private final String pattern;
 
-	private transient Pattern compiledPattern;
+    private transient Pattern compiledPattern;
 
-	public static String getDisplayName(){
-		return Messages.CommitAuthorBranchBuildStrategy_DisplayName();
-	}
+    public static String getDisplayName() {
+        return Messages.CommitAuthorBranchBuildStrategy_DisplayName();
+    }
 
-	public String getPattern(){
-		return pattern;
-	}
+    public String getPattern() {
+        return pattern;
+    }
 
-	public Pattern getCompiledPattern(){
-		if (compiledPattern == null){
-			compiledPattern = Pattern.compile(pattern);
-		}
-		return compiledPattern;
-	}
+    public Pattern getCompiledPattern() {
+        if (compiledPattern == null) {
+            compiledPattern = Pattern.compile(pattern);
+        }
+        return compiledPattern;
+    }
 
-	public abstract String getAuthor(SCMSource source, SCMRevision revision) throws CouldNotGetCommitDataException;
+    public abstract String getAuthor(SCMSource source, SCMRevision revision) throws CouldNotGetCommitDataException;
 
-	public CommitAuthorBranchBuildStrategy(String pattern){
-		this.pattern = pattern;
-	}
+    public CommitAuthorBranchBuildStrategy(String pattern) {
+        this.pattern = pattern;
+    }
 
-	@Override
-	public boolean isAutomaticBuild(SCMSource source, SCMHead head, SCMRevision currRevision, SCMRevision prevRevision) {
-		String author = null;
-		try {
-			author = getAuthor(source, currRevision);
-		}
-		catch (CouldNotGetCommitDataException e) {
-			LOGGER.error("Could not attempt to prevent automatic build by commit author pattern "
-					+ "because of an error when fetching the commit author", e);
-			return true;
-		}
-		if (author == null) {
-			LOGGER.info("Could not attempt to prevent automatic build by commit author pattern "
-					+ "because commit author is null");
-			return true;
-		}
-		if (getCompiledPattern().matcher(author).find()){
-			String ownerDisplayName = "Global";
-			SCMSourceOwner owner = source.getOwner();
-			if (owner != null){
-				ownerDisplayName = owner.getDisplayName();
-			}
-			LOGGER.info("Automatic build prevented for job [{}] because commit author [{}] "
-					+ "matched expression [{}]", ownerDisplayName, author, pattern);
-			return false;
-		}
-		return true;
-	}
-
+    @Override
+    public boolean isAutomaticBuild(SCMSource source, SCMHead head, SCMRevision currRevision, SCMRevision prevRevision) {
+        String author = null;
+        try {
+            author = getAuthor(source, currRevision);
+        } catch (CouldNotGetCommitDataException e) {
+            LOGGER.error("Could not attempt to prevent automatic build by commit author pattern "
+                    + "because of an error when fetching the commit author", e);
+            return true;
+        }
+        if (author == null) {
+            LOGGER.info("Could not attempt to prevent automatic build by commit author pattern "
+                    + "because commit author is null");
+            return true;
+        }
+        if (getCompiledPattern().matcher(author).find()) {
+            String ownerDisplayName = "Global";
+            SCMSourceOwner owner = source.getOwner();
+            if (owner != null) {
+                ownerDisplayName = owner.getDisplayName();
+            }
+            LOGGER.info("Automatic build prevented for job [{}] because commit author [{}] "
+                    + "matched expression [{}]", ownerDisplayName, author, pattern);
+            return false;
+        }
+        return true;
+    }
 }

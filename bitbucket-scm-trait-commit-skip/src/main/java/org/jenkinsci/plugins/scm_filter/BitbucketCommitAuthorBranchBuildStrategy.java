@@ -16,45 +16,45 @@ import jenkins.scm.api.SCMSourceDescriptor;
 
 public class BitbucketCommitAuthorBranchBuildStrategy extends CommitAuthorBranchBuildStrategy {
 
-	@DataBoundConstructor
-	public BitbucketCommitAuthorBranchBuildStrategy(String pattern) {
-		super(pattern);
-	}
+    @DataBoundConstructor
+    public BitbucketCommitAuthorBranchBuildStrategy(String pattern) {
+        super(pattern);
+    }
 
-	@Override
-	public String getAuthor(SCMSource source, SCMRevision currRevision) throws CouldNotGetCommitDataException {
-		SCMRevision revision = currRevision;
-		if (currRevision instanceof PullRequestSCMRevision) {
-			PullRequestSCMRevision<?> pr = (PullRequestSCMRevision<?>) currRevision;
-			revision = pr.getPull();
-		}
-		if (revision instanceof BitbucketGitSCMRevision) {
-			BitbucketGitSCMRevision bbRevision = (BitbucketGitSCMRevision) revision;
-			return Util.fixEmpty(bbRevision.getAuthor());
-		} else if (revision instanceof BitbucketSCMSource.MercurialRevision) {
-			BitbucketSCMSource.MercurialRevision bbRevision = (BitbucketSCMSource.MercurialRevision) revision;
-			return Util.fixEmpty(bbRevision.getAuthor());
-		}
+    @Override
+    public String getAuthor(SCMSource source, SCMRevision currRevision) throws CouldNotGetCommitDataException {
+        SCMRevision revision = currRevision;
+        if (currRevision instanceof PullRequestSCMRevision) {
+            PullRequestSCMRevision<?> pr = (PullRequestSCMRevision<?>) currRevision;
+            revision = pr.getPull();
+        }
+        if (revision instanceof BitbucketGitSCMRevision) {
+            BitbucketGitSCMRevision bbRevision = (BitbucketGitSCMRevision) revision;
+            return Util.fixEmpty(bbRevision.getAuthor());
+        } else if (revision instanceof BitbucketSCMSource.MercurialRevision) {
+            BitbucketSCMSource.MercurialRevision bbRevision = (BitbucketSCMSource.MercurialRevision) revision;
+            return Util.fixEmpty(bbRevision.getAuthor());
+        }
 
-		throw new CouldNotGetCommitDataException("Revision class is not a BitbucketGitSCMRevision or BitbucketSCMSource.MercurialRevision");
-	}
+        throw new CouldNotGetCommitDataException("Revision class is not a BitbucketGitSCMRevision or BitbucketSCMSource.MercurialRevision");
+    }
 
-	@Extension
-	public static class DescriptorImpl extends RegexFilterBranchBuildStrategyDescriptor {
+    @Extension
+    public static class DescriptorImpl extends RegexFilterBranchBuildStrategyDescriptor {
 
-		@Override
-		public @Nonnull
-		String getDisplayName() {
-			return CommitAuthorBranchBuildStrategy.getDisplayName();
-		}
+        @Override
+        @Nonnull
+        public String getDisplayName() {
+            return CommitAuthorBranchBuildStrategy.getDisplayName();
+        }
 
-		/**
-		 * {@inheritDoc}
-		 * this is currently never called for organization folders, see JENKINS-54468
-		 */
-		@Override
-		public boolean isApplicable(@Nonnull SCMSourceDescriptor sourceDescriptor) {
-			return BitbucketSCMSource.DescriptorImpl.class.isAssignableFrom(sourceDescriptor.getClass());
-		}
-	}
+        /**
+         * {@inheritDoc}
+         * this is currently never called for organization folders, see JENKINS-54468
+         */
+        @Override
+        public boolean isApplicable(@Nonnull SCMSourceDescriptor sourceDescriptor) {
+            return BitbucketSCMSource.DescriptorImpl.class.isAssignableFrom(sourceDescriptor.getClass());
+        }
+    }
 }
