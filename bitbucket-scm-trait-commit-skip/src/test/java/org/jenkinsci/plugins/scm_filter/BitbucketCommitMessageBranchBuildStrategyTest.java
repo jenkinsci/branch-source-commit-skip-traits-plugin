@@ -5,6 +5,8 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import hudson.model.TaskListener;
+import hudson.util.LogTaskListener;
 import org.junit.Test;
 
 import com.cloudbees.jenkins.plugins.bitbucket.BitbucketGitSCMRevision;
@@ -14,7 +16,18 @@ import com.cloudbees.jenkins.plugins.bitbucket.client.branch.BitbucketCloudCommi
 
 import jenkins.scm.api.SCMHead;
 
+import javax.annotation.Nonnull;
+import java.io.PrintStream;
+
 public class BitbucketCommitMessageBranchBuildStrategyTest {
+    private final TaskListener listener = new TaskListener() {
+        @Nonnull
+        @Override
+        public PrintStream getLogger() {
+            return System.out;
+        }
+    };
+
     @Test
     public void skip_build_event_if_pattern_matches() throws Exception {
         BitbucketCommitMessageBranchBuildStrategy strategy = new BitbucketCommitMessageBranchBuildStrategy("initial");
@@ -23,18 +36,19 @@ public class BitbucketCommitMessageBranchBuildStrategyTest {
         when(head.getName()).thenReturn("feature/release");
 
         BitbucketSCMSource source = new BitbucketSCMSource("amuniz", "test-repos");
-        assertThat(strategy.isAutomaticBuild(source, head, buildRevision(head), null), equalTo(false));
+
+        assertThat(strategy.isAutomaticBuild(source, head, buildRevision(head), null, listener), equalTo(false));
     }
 
     @Test
     public void no_skip_build_event_if_no_matches() throws Exception {
         BitbucketCommitMessageBranchBuildStrategy strategy = new BitbucketCommitMessageBranchBuildStrategy(".*test.*");
-        
+
         SCMHead head = mock(SCMHead.class);
         when(head.getName()).thenReturn("feature/release");
-        
+
         BitbucketSCMSource source = new BitbucketSCMSource("amuniz", "test-repos");
-        assertThat(strategy.isAutomaticBuild(source, head, buildRevision(head), null), equalTo(true));
+        assertThat(strategy.isAutomaticBuild(source, head, buildRevision(head), null, listener), equalTo(true));
     }
 
     private BitbucketGitSCMRevision buildRevision(SCMHead head) {

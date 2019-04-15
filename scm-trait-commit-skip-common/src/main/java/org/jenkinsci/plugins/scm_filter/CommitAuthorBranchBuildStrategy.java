@@ -1,15 +1,16 @@
 package org.jenkinsci.plugins.scm_filter;
 
-import java.util.regex.Pattern;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import edu.umd.cs.findbugs.annotations.NonNull;
+import hudson.model.TaskListener;
 import jenkins.branch.BranchBuildStrategy;
 import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.SCMRevision;
 import jenkins.scm.api.SCMSource;
 import jenkins.scm.api.SCMSourceOwner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.regex.Pattern;
 
 /**
  * A strategy for avoiding automatic builds for commits with authors that contain a specific pattern.
@@ -22,7 +23,7 @@ public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrateg
 
     private transient Pattern compiledPattern;
 
-    public static String getDisplayName() {
+    static String getDisplayName() {
         return Messages.CommitAuthorBranchBuildStrategy_DisplayName();
     }
 
@@ -30,7 +31,7 @@ public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrateg
         return pattern;
     }
 
-    public Pattern getCompiledPattern() {
+    private Pattern getCompiledPattern() {
         if (compiledPattern == null) {
             compiledPattern = Pattern.compile(pattern);
         }
@@ -44,8 +45,8 @@ public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrateg
     }
 
     @Override
-    public boolean isAutomaticBuild(SCMSource source, SCMHead head, SCMRevision currRevision, SCMRevision prevRevision) {
-        String author = null;
+    public boolean isAutomaticBuild(@NonNull final SCMSource source, @NonNull final SCMHead head, @NonNull final SCMRevision currRevision, final SCMRevision prevRevision, @NonNull final TaskListener listener) {
+        String author;
         try {
             author = getAuthor(source, currRevision);
         } catch (CouldNotGetCommitDataException e) {
