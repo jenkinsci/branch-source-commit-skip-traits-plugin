@@ -31,12 +31,9 @@ public class BitbucketCommitMessageBranchBuildStrategy extends CommitMessageBran
         if (revision instanceof BitbucketGitSCMRevision) {
             BitbucketGitSCMRevision bbRevision = (BitbucketGitSCMRevision) revision;
             return Util.fixEmpty(bbRevision.getMessage());
-        } else if (revision instanceof BitbucketSCMSource.MercurialRevision) {
-            BitbucketSCMSource.MercurialRevision bbRevision = (BitbucketSCMSource.MercurialRevision) revision;
-            return Util.fixEmpty(bbRevision.getMessage());
         }
 
-        throw new CouldNotGetCommitDataException("Revision class is not a BitbucketGitSCMRevision or BitbucketSCMSource.MercurialRevision");
+        throw new CouldNotGetCommitDataException("Revision class is not a BitbucketGitSCMRevision");
     }
 
     @Extension

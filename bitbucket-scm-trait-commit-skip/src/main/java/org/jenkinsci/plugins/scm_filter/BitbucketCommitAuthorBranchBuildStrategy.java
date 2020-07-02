@@ -31,12 +31,9 @@ public class BitbucketCommitAuthorBranchBuildStrategy extends CommitAuthorBranch
         if (revision instanceof BitbucketGitSCMRevision) {
             BitbucketGitSCMRevision bbRevision = (BitbucketGitSCMRevision) revision;
             return Util.fixEmpty(bbRevision.getAuthor());
-        } else if (revision instanceof BitbucketSCMSource.MercurialRevision) {
-            BitbucketSCMSource.MercurialRevision bbRevision = (BitbucketSCMSource.MercurialRevision) revision;
-            return Util.fixEmpty(bbRevision.getAuthor());
         }
 
-        throw new CouldNotGetCommitDataException("Revision class is not a BitbucketGitSCMRevision or BitbucketSCMSource.MercurialRevision");
+        throw new CouldNotGetCommitDataException("Revision class is not a BitbucketGitSCMRevision");
     }
 
     @Extension
