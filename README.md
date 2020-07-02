@@ -11,3 +11,17 @@ The filtering will be performed, applying it whether it:
 - The last commit message contains "[skip ci]" or "[ci skip]". The check is case-insensitive.
 - The last commit message matches a pattern.
 - The last commit author matches a pattern.
+
+## Environment
+
+The following build environment is required to build this plugin
+
+* `java-1.8` and `maven 3.5.0+`
+
+## Build
+
+To build the plugin locally:
+
+```bash
+mvn clean verify
+```
