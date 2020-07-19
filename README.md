@@ -1,5 +1,4 @@
 
-
 # Commit skip SCM filters
 
 This repository contains a collection of traits for several branch-source Jenkins plugins.
