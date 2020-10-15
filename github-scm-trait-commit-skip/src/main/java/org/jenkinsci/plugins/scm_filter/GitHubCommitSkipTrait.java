@@ -1,6 +1,8 @@
 package org.jenkinsci.plugins.scm_filter;
 
-import edu.umd.cs.findbugs.annotations.NonNull;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
 import hudson.Extension;
 import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.SCMSource;
@@ -26,13 +28,13 @@ public class GitHubCommitSkipTrait extends CommitSkipTrait {
      * Constructor for stapler.
      */
     @DataBoundConstructor
-    public GitHubCommitSkipTrait() {
-        super();
+    public GitHubCommitSkipTrait(@CheckForNull String tokens) {
+        super(tokens);
     }
 
     @Override
     protected void decorateContext(SCMSourceContext<?, ?> context) {
-        context.withFilter(new ExcludeCommitPRsSCMHeadFilter());
+        context.withFilter(new ExcludeCommitPRsSCMHeadFilter(getTokens()));
     }
 
     /**
@@ -60,8 +62,12 @@ public class GitHubCommitSkipTrait extends CommitSkipTrait {
      */
     private static class ExcludeCommitPRsSCMHeadFilter extends ExcludeByMessageSCMHeadFilter {
 
+        public ExcludeCommitPRsSCMHeadFilter(String tokens) {
+            super(tokens);
+        }
+
         @Override
-        public boolean isExcluded(@NonNull SCMSourceRequest scmSourceRequest, @NonNull SCMHead scmHead) throws IOException, InterruptedException {
+        public boolean isExcluded(@Nonnull SCMSourceRequest scmSourceRequest, @Nonnull SCMHead scmHead) throws IOException, InterruptedException {
             if (scmHead instanceof PullRequestSCMHead) {
                 Iterable<GHPullRequest> pulls = ((GitHubSCMSourceRequest) scmSourceRequest).getPullRequests();
                 for (GHPullRequest pull : pulls) {

@@ -9,6 +9,19 @@ import jenkins.scm.api.trait.SCMSourceTraitDescriptor;
  */
 public abstract class BranchCommitSkipTrait extends SCMSourceTrait {
 
+    private final String tokens;
+
+    /**
+     * Constructor for stapler.
+     */
+    public BranchCommitSkipTrait(String tokens) {
+        this.tokens = tokens;
+    }
+
+    public String getTokens() {
+        return tokens;
+    }
+
     @Override
     protected abstract void decorateContext(SCMSourceContext<?, ?> context);
 
@@ -19,7 +32,7 @@ public abstract class BranchCommitSkipTrait extends SCMSourceTrait {
 
         @Override
         public String getDisplayName() {
-            return "Filter branches by commit message";
+            return Messages.BranchCommitSkipTrait_DisplayName();
         }
     }
 }

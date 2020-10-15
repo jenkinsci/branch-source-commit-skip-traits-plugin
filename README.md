@@ -8,6 +8,10 @@ It provides filters for both pull requests and/or branches on jobs created from 
 
 The filtering will be performed, applying it whether it:
 
-- The last commit message contains "[skip ci]" or "[ci skip]". The check is case-insensitive.
+- The last commit message contains `[skip ci]` or `[ci skip]`. The check is case-insensitive.
 - The last commit message matches a pattern.
 - The last commit author matches a pattern.
+
+The commit message contains behavior is configurable to additional strings besides the
+defaults provided by the plugin. The strings are treated as literal strings for the
+contains option.

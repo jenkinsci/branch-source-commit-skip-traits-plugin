@@ -15,38 +15,38 @@ import jenkins.scm.api.SCMSource;
 
 public final class GitHubUtils {
 
-	private GitHubUtils() {
-		// utils class, no instances
-	}
+    private GitHubUtils() {
+        // utils class, no instances
+    }
 
-	public static GHCommit getCommit(SCMSource source,SCMRevision revision) throws CouldNotGetCommitDataException {
-		String hash = null;
-		if (AbstractGitSCMSource.SCMRevisionImpl.class.isAssignableFrom(revision.getClass())){
-			hash = ((AbstractGitSCMSource.SCMRevisionImpl) revision).getHash();
-		}
-		if (PullRequestSCMRevision.class.isAssignableFrom(revision.getClass())){
-			hash = ((PullRequestSCMRevision) revision).getPullHash();
-		}
-		if (hash == null) {
-			throw new CouldNotGetCommitDataException("Unknown revision class ["+revision.getClass()+"] or null hash");
-		}
+    public static GHCommit getCommit(SCMSource source,SCMRevision revision) throws CouldNotGetCommitDataException {
+        String hash = null;
+        if (AbstractGitSCMSource.SCMRevisionImpl.class.isAssignableFrom(revision.getClass())){
+            hash = ((AbstractGitSCMSource.SCMRevisionImpl) revision).getHash();
+        }
+        if (PullRequestSCMRevision.class.isAssignableFrom(revision.getClass())){
+            hash = ((PullRequestSCMRevision) revision).getPullHash();
+        }
+        if (hash == null) {
+            throw new CouldNotGetCommitDataException("Unknown revision class ["+revision.getClass()+"] or null hash");
+        }
 
-		if (!GitHubSCMSource.class.isAssignableFrom(source.getClass())){
-			throw new IllegalArgumentException("SCM Source ["+source.getClass()+"] is not a GitHubSCMSource ");
-		}
-		GitHubSCMSource ghSource = (GitHubSCMSource) source;
+        if (!GitHubSCMSource.class.isAssignableFrom(source.getClass())){
+            throw new IllegalArgumentException("SCM Source ["+source.getClass()+"] is not a GitHubSCMSource ");
+        }
+        GitHubSCMSource ghSource = (GitHubSCMSource) source;
 
-		GitHub gitHub = null;
-		try {
-			gitHub = Connector.connect(ghSource.getApiUri(), Connector.lookupScanCredentials
-					((Item) ghSource.getOwner(), ghSource.getApiUri(), ghSource.getCredentialsId()));
-			return gitHub.getRepository(ghSource.getRepoOwner()+"/"+ghSource.getRepository()).getCommit(hash);
-		} catch (IOException e){
-			throw new CouldNotGetCommitDataException(e);
-		}
-		finally{
-			Connector.release(gitHub);
-		}
-	}
+        GitHub gitHub = null;
+        try {
+            gitHub = Connector.connect(ghSource.getApiUri(), Connector.lookupScanCredentials
+                    ((Item) ghSource.getOwner(), ghSource.getApiUri(), ghSource.getCredentialsId()));
+            return gitHub.getRepository(ghSource.getRepoOwner()+"/"+ghSource.getRepository()).getCommit(hash);
+        } catch (IOException e){
+            throw new CouldNotGetCommitDataException(e);
+        }
+        finally{
+            Connector.release(gitHub);
+        }
+    }
 
 }

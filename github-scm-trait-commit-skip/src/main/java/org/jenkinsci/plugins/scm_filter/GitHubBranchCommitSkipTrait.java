@@ -1,6 +1,8 @@
 package org.jenkinsci.plugins.scm_filter;
 
-import edu.umd.cs.findbugs.annotations.NonNull;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+
 import hudson.Extension;
 import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.SCMSource;
@@ -26,13 +28,13 @@ public class GitHubBranchCommitSkipTrait extends BranchCommitSkipTrait {
      * Constructor for stapler.
      */
     @DataBoundConstructor
-    public GitHubBranchCommitSkipTrait() {
-        super();
+    public GitHubBranchCommitSkipTrait(@CheckForNull String tokens) {
+        super(tokens);
     }
 
     @Override
     protected void decorateContext(SCMSourceContext<?, ?> context) {
-        context.withFilter(new ExcludeBranchCommitSCMHeadFilter());
+        context.withFilter(new ExcludeBranchCommitSCMHeadFilter(getTokens()));
     }
 
     /**
@@ -60,8 +62,12 @@ public class GitHubBranchCommitSkipTrait extends BranchCommitSkipTrait {
      */
     private static class ExcludeBranchCommitSCMHeadFilter extends ExcludeByMessageSCMHeadFilter {
 
+        public ExcludeBranchCommitSCMHeadFilter(String tokens) {
+            super(tokens);
+        }
+
         @Override
-        public boolean isExcluded(@NonNull SCMSourceRequest scmSourceRequest, @NonNull SCMHead scmHead) throws IOException, InterruptedException {
+        public boolean isExcluded(@Nonnull SCMSourceRequest scmSourceRequest, @Nonnull SCMHead scmHead) throws IOException, InterruptedException {
             if (scmHead instanceof BranchSCMHead) {
                 Iterable<GHBranch> branches = ((GitHubSCMSourceRequest) scmSourceRequest).getBranches();
                 for (GHBranch branch : branches) {
