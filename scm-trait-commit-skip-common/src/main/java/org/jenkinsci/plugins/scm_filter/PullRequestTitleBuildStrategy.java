@@ -3,6 +3,7 @@ package org.jenkinsci.plugins.scm_filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import hudson.model.TaskListener;
 import jenkins.branch.BranchBuildStrategy;
 import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.SCMRevision;
@@ -40,7 +41,7 @@ public abstract class PullRequestTitleBuildStrategy extends BranchBuildStrategy 
 
     @Override
     public boolean isAutomaticBuild(SCMSource source, SCMHead head, SCMRevision currRevision,
-            SCMRevision prevRevision) {
+            SCMRevision lastBuiltRevision, SCMRevision lastSeenRevision, TaskListener listener) {
         if (!(head instanceof ChangeRequestSCMHead)) {
             return false;
         }

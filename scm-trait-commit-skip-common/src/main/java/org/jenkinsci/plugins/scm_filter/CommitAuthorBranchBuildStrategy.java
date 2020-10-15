@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import hudson.model.TaskListener;
 import jenkins.branch.BranchBuildStrategy;
 import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.SCMRevision;
@@ -44,7 +45,8 @@ public abstract class CommitAuthorBranchBuildStrategy extends BranchBuildStrateg
     }
 
     @Override
-    public boolean isAutomaticBuild(SCMSource source, SCMHead head, SCMRevision currRevision, SCMRevision prevRevision) {
+    public boolean isAutomaticBuild(SCMSource source, SCMHead head, SCMRevision currRevision,
+            SCMRevision lastBuiltRevision, SCMRevision lastSeenRevision, TaskListener listener) {
         String author = null;
         try {
             author = getAuthor(source, currRevision);
