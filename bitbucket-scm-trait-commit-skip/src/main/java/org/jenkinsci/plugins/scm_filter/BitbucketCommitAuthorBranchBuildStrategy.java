@@ -10,6 +10,8 @@ import com.cloudbees.jenkins.plugins.bitbucket.PullRequestSCMRevision;
 
 import hudson.Extension;
 import hudson.Util;
+import hudson.model.TaskListener;
+import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.SCMRevision;
 import jenkins.scm.api.SCMSource;
 import jenkins.scm.api.SCMSourceDescriptor;

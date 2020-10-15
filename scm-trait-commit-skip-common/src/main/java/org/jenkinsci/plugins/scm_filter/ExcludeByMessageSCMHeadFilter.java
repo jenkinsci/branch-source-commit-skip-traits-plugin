@@ -1,11 +1,12 @@
 package org.jenkinsci.plugins.scm_filter;
 
-import edu.umd.cs.findbugs.annotations.NonNull;
+import java.io.IOException;
+
+import javax.annotation.Nonnull;
+
 import jenkins.scm.api.SCMHead;
 import jenkins.scm.api.trait.SCMHeadFilter;
 import jenkins.scm.api.trait.SCMSourceRequest;
-
-import java.io.IOException;
 
 /**
  * Filter that excludes pull requests according to its last commit message (if it contains [ci skip] or [skip ci], case insensitive).
@@ -14,10 +15,16 @@ import java.io.IOException;
  */
 abstract class ExcludeByMessageSCMHeadFilter extends SCMHeadFilter {
 
+    private final TokenListMatcher matcher;
+
+    public ExcludeByMessageSCMHeadFilter(String tokens) {
+        matcher = new TokenListMatcher(tokens);
+    }
+
     @Override
-    abstract public boolean isExcluded(@NonNull SCMSourceRequest scmSourceRequest, @NonNull SCMHead scmHead) throws IOException, InterruptedException;
+    abstract public boolean isExcluded(@Nonnull SCMSourceRequest scmSourceRequest, @Nonnull SCMHead scmHead) throws IOException, InterruptedException;
 
     boolean containsSkipToken(String commitMsg) {
-        return commitMsg.contains("[ci skip]") || commitMsg.contains("[skip ci]");
+        return matcher.containsSkipToken(commitMsg);
     }
 }
